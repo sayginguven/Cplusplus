@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+int main()
+{
+	std::string originalString{};
+	std::cout << "Provide a long string with spaces." << std::endl;
+	std::getline(std::cin, originalString);
+	std::string copyString{ originalString };
+
+	std::vector<int> wordLength;//6 4 6 ...
+	std::vector<std::string> separatedWords; //"String", "word" "length" ...
+
+	size_t stringSize = originalString.length();
+
+
+
+	for (size_t i{ 0 }; i < stringSize; i += 1)
+	{
+		if (originalString.find(" ") == std::string::npos) {
+			wordLength.push_back(stringSize);
+			std::string firstWord{ originalString,0, originalString.find(" ") };
+			separatedWords.push_back(firstWord);
+			break;
+		}
+		wordLength.push_back(originalString.find(" "));
+
+		std::string firstWord{ originalString,0, originalString.find(" ") };
+		separatedWords.push_back(firstWord);
+
+
+		std::string temp{ originalString,originalString.find(" ") + 1, stringSize };
+		originalString = temp;
+		stringSize = originalString.length();
+	}
+
+
+
+	//report
+	//checking only alpha numeric 
+	std::cout << "Your string is : " << copyString << std::endl;
+
+	for (size_t i{ 0 }; i < wordLength.size(); i += 1)
+	{
+		std::cout << (i+1) << ". word: " << separatedWords.at(i) << " has -- " 
+			      << wordLength.at(i) << " -- characters." << std::endl;
+	}
+
+	system("pause");
+	return 0;
+}
+
