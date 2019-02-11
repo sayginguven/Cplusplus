@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+
+class Account {
+
+private:
+	double checking;
+	double saving;
+
+public:
+	void setchecking(double valueX) {
+		checking = valueX;
+	}
+
+	void setY(double valueY) {
+		saving = valueY;
+	}
+
+	double getChecking() const {
+		return checking;
+	}
+
+	double getSaving() const {
+		return saving;
+	}
+
+
+	Account() : checking{ 0 }, saving{ 0 } {
+	}
+
+	Account(double x,double y) : checking{ x }, saving{y} {
+	}
+
+	Account Add(const Account &copyObj)  const{
+		
+		return operator+(copyObj);
+		//return *this + copyObj;
+		
+		//return Account(x + copyObj.x, y + copyObj.y);
+	}
+
+	Account Multiply(const Account &copyObj)  const {
+		return Account(checking * copyObj.checking, saving * copyObj.saving);
+	}
+
+	Account operator*(const Account &copyObj)  const {
+		return Multiply(copyObj);
+	}
+
+	Account operator+(const Account &copyObj)  const {
+		return Account(checking + copyObj.checking, saving + copyObj.saving);
+		//return Add(copyObj);
+	}
+
+	bool operator==(const Account &copyObj)  const {
+		return checking == copyObj.getChecking() && saving == copyObj.getSaving();
+	}
+
+	bool operator!=(const Account &copyObj)  const {
+		return !(*this == copyObj);
+	}
+
+};
+
+std::ostream& operator<<(std::ostream& stream, const Account&copyObj) {
+	stream << copyObj.getChecking() << ", " << copyObj.getSaving();
+	return stream;
+}
+
+
+int main() {
+
+	Account john(550, 30000);
+	Account jane(450, 20000);
+	Account bonus(1.0, 1.01);
+
+	Account join = john.Add(jane.Multiply(bonus));
+	//Account result = a + b *c;
+
+
+	//std::cout << result.getX() << ", " << result.getY();
+	std::cout << join << std::endl;
+
+	std::cout << std::boolalpha << "jane is equal to john : " << (jane == john) << std::endl;
+	std::cout << std::boolalpha << "jane is NOT equal to john : " << (jane != john) <<std::endl;
+
+	system("pause");
+	return 0;
+}
