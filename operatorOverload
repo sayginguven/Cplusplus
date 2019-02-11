@@ -12,7 +12,7 @@ public:
 		checking = valueX;
 	}
 
-	void setY(double valueY) {
+	void setSaving(double valueY) {
 		saving = valueY;
 	}
 
