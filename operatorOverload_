@@ -1,0 +1,109 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+class Player {
+
+private:
+	int health;
+	int experience;
+	double boost;
+	mutable int howMany{ 0 };
+public:
+	Player()
+		:  health{ 100 }, experience{ 0 }, boost{ 1 }
+	{
+	}
+
+	Player(int health, int experience, double boost)
+		:  health{ health }, experience{ experience }, boost{ boost }
+	{
+	}
+
+	Player(const Player &copySource) {
+		this->health = copySource.health;
+		this->experience = copySource.experience;
+		this->boost = copySource.boost;
+	}
+
+	~Player(){
+	}
+
+
+	int getHealth() const{
+		return health;
+	}
+
+	int getExperience() const {
+		return experience;
+	}
+
+	double getBoost() const {
+		return boost;
+	}
+
+	double damagePower() const{
+		return experience * boost;
+	}
+
+	Player add(const Player& object) const {
+		return Player(health + object.health, experience + object.experience, boost + object.boost);
+		//return   *this + object;
+	}
+	Player operator+ (const Player& object) const {
+		howMany += 1;
+
+		return add(object);
+	}
+
+	Player multiply(const Player& object) const {
+		return Player(health, experience, boost*object.boost);
+	}
+
+	Player operator* (const Player& object) const {
+		howMany += 1;
+
+		return multiply(object);
+	}
+
+	bool operator== (const Player& object) const{
+		return this->health == object.health && this->experience == object.experience && this->boost == object.boost;
+	}
+
+	bool operator!= (const Player& object) const{
+		return !(*this == object);
+	}
+
+
+};
+
+std::ostream& operator<< (std::ostream& stream, const Player &source) {
+	
+	stream << "Health : " << source.getHealth() << std::endl <<
+		      "Experience: " << source.getExperience() << std::endl <<
+		      "Boost : " << source.getBoost() << std::endl << 
+		      "Damage power : " << source.damagePower() << std::endl;
+	return stream;
+}
+
+
+int main() {
+
+	const Player wizzard( 100, 99, 0.8);
+	const Player wolf(40, 10, 1.2);
+	const Player boosterMagician(20, 9999, 1.5);
+
+	const Player wolfman = wizzard + wolf * boosterMagician;
+	//Player wolfman = wizzard.add(wolf.multiply(boosterMagician));
+
+	std::cout << wolfman;
+
+	const Player Ken(100, 101, 0.9);
+	const Player Ryu(100, 101, 0.9);
+
+	std::cout << std::boolalpha << (Ken == Ryu) << std::endl;
+
+
+	system("pause");
+	return 0;
+}
