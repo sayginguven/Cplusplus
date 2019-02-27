@@ -18,7 +18,7 @@ public:
 	{
 	}
 	~Icecream() {
-		std::cout << "destroyed with " << flavor << " flavor is destroyed! :("  << std::endl;
+		std::cout << "icecream with " << flavor << " flavor is destroyed! :("  << std::endl;
 	}
 	T getName() {
 		return flavor;
@@ -34,8 +34,10 @@ int main() {
 	Icecream<std::string> *iptr = new Icecream<std::string>( "mapple and nuts" );
 	delete iptr;
 
-	//no delete required
+	//delete required
 	Icecream<std::string>* ice1 = new Icecream<std::string>{ "chocolate" };
+	
+	//no delete required
 	std::unique_ptr<Icecream<std::string>> ice2= std::make_unique<Icecream<std::string>>( "london fog" );
 	std::unique_ptr<Icecream<std::string>> ice3; 
 
