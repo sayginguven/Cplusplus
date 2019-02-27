@@ -36,6 +36,10 @@ public:
 	void sound() override {
 		std::cout << "my name is " << id << " and I say whoof" << std::endl;
 	}
+
+	void dogFunc() {
+		std::cout << "I can chew anything I like" << std::endl;
+	}
 };
 
 class Bird :public Animal {
@@ -60,7 +64,7 @@ int main() {
 	Animals1.push_back(std::make_unique<Cat>("fluffy"));
 	Animals1.push_back(std::make_unique<Dog>("spike"));
 	Animals1.push_back(std::make_unique<Bird>("dragon"));
-	
+
 	std::cout << "Animal 1 vector polymorpism" << std::endl;
 	for (const auto &animal : Animals1) {
 		animal->sound();
@@ -71,20 +75,23 @@ int main() {
 	std::vector<std::unique_ptr<Animal>> Animals2;
 
 	std::unique_ptr<Animal> cat1 = std::make_unique<Cat>("twity");
-	std::unique_ptr<Animal> dog1= std::make_unique<Dog>("marley");
+	std::unique_ptr<Animal> dog1 = std::make_unique<Dog>("marley");
 	std::unique_ptr<Animal> bird1 = std::make_unique<Bird>("angry bird");
 
 	Animals2.push_back(std::move(cat1));
 	Animals2.push_back(std::move(dog1));
 	Animals2.push_back(std::move(bird1));
-	
+
 
 	std::cout << "\n\nAnimal 2 vector polymorpism" << std::endl;
 	for (const auto &animal : Animals2) {
 		animal->sound();
 		//(*animal).sound();
 	}
-	
+
+
+	std::cout << "\n\ncasting for dog pointer " << std::endl;
+	dynamic_cast<Dog*>(Animals2.at(1).get())->dogFunc();
 
 	system("pause");
 	return 0;
