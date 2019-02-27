@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <memory>
 #include <vector>
 
 class Animal { // abstract
@@ -13,57 +14,71 @@ public:
 
 class Cat :public Animal {
 private:
-	int id;
+	std::string name;
 
 public:
-	Cat(int id) : id{ id } {}
-	Cat() :Cat(0) {}
+	Cat(std::string id) : name{ id } {}
+	Cat() :Cat("") {}
 
 	void sound() override {
-		std::cout << "my id is " << id << " and I say meow" << std::endl;
+		std::cout << "my name is " << name << " and I say meow" << std::endl;
 	}
 };
 
 class Dog :public Animal {
 private:
-	int id;
+	std::string name;
 
 public:
-	Dog(int id) : id{ id } {}
-	Dog() :Dog(0) {}
+	Dog(std::string name) : name{ name } {}
+	Dog() :Dog("") {}
 public:
 	void sound() override {
-		std::cout << "my id is " << id << " and I say whoof" << std::endl;
+		std::cout << "my name is " << name << " and I say whoof" << std::endl;
+	}
+
+	void dogFunc() {
+		std::cout << "I can chew anything I like" << std::endl;
 	}
 };
 
 class Bird :public Animal {
 private:
-	int id;
+	std::string name;
 
 public:
-	Bird(int id) : id{ id } {}
-	Bird() : Bird(0) {}
+	Bird(std::string name) : name{ name } {}
+	Bird() : Bird("") {}
 public:
 	void sound() override {
-		std::cout << "my id is " << id << " and I say tweet" << std::endl;
+		std::cout << "my name is " << name << " and I say tweet" << std::endl;
 	}
 };
 
 
+
 int main() {
+
+	Animal * test = new Dog;
+	std::cout << "casting for raw dog pointer " << std::endl;
+	dynamic_cast<Dog*>(test)->dogFunc();
 
 	std::vector<std::shared_ptr<Animal>> Animals;
 
-	Animals.push_back(std::make_shared<Cat>(1));
-	Animals.push_back(std::make_shared<Dog>(2));
-	Animals.push_back(std::make_shared<Bird>(3));
+	Animals.push_back(std::make_shared<Cat>("catty"));
+	Animals.push_back(std::make_shared<Dog>("doggy"));
+	Animals.push_back(std::make_shared<Bird>("birdy"));
 
 
 	//thats ok to print without const and ref(&) to each element
+	std::cout << "\n\nAnimals vector sound " << std::endl;
 	for (auto animal : Animals) {
 		animal->sound();
 	}
+
+	std::cout << "\n\ncasting for shared dog pointer " << std::endl;
+	std::shared_ptr<Animal> doggy = std::make_shared<Dog>("goofy");
+	std::dynamic_pointer_cast<Dog>(doggy)->dogFunc();
 
 
 	system("pause");
