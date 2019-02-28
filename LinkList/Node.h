@@ -1,13 +1,16 @@
 #pragma once
-//add template for flexible linked list
+//friend LinkedList declaration
+template<class T> class LinkedList;
+
+template <class T>
 class Node {
 	
-friend class LinkedList; //linked list can access Node class
+friend class LinkedList<T>; //linked list can access Node class
 
 private:
-	int data;
-	Node *nextPtr; 
-	Node *prevPtr;
+	T data;
+	Node<T> *nextPtr; 
+	Node<T> *prevPtr;
 
 	//                  ______
 	//				   |      |     
@@ -16,24 +19,27 @@ private:
 
 public:
 	Node();//default constructor signature
-	Node(const int &data);  //overloaded constuctor signature
-	int getData() const;  //getter signature
+	Node(const T &data);  //overloaded constuctor signature
+	T getData() const;  //getter signature
 
 }; 
 
-Node::Node() // default constructor implementation
+template <class T>
+Node<T>::Node() // default constructor implementation
 	: Node(NULL) //delegated constructor
 {
 } 
 
-Node::Node(const int &data) //overloaded constructor implementation
+template <class T>
+Node<T>::Node(const T &data) //overloaded constructor implementation
 	: data(data),
 	nextPtr(nullptr), prevPtr(nullptr)
 {
 
 } 
 
-int Node::getData() const // getter implementation
+template <class T>
+T Node<T>::getData() const // getter implementation
 {
 	return data;
 } 

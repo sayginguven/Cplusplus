@@ -1,7 +1,9 @@
 #include <iostream>
+#include <string>
 #include "LinkedList.h"
 #include "Node.h"
 //git test!!
+
 void menu() {
 	std::cout << std::endl;
 	std::cout << " 0 - clean screen " << std::endl;
@@ -22,7 +24,8 @@ void menu() {
 
 int main()
 {
-	LinkedList myList;
+	LinkedList<int> myList;
+
 	int choice;
 	menu();
 	do {

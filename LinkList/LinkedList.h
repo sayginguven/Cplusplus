@@ -2,12 +2,13 @@
 #include <iostream>
 #include "Node.h" 
 
+template <class T>
 class LinkedList {
 
 private:
-	Node *startPtr;
-	Node *endPtr;
-	Node *getNewNode(const int &data);// allocate space in RAM
+	Node<T> *startPtr;
+	Node<T> *endPtr;
+	Node<T> *getNewNode(const int &data);// allocate space in RAM
 
 public:
 	LinkedList();      
@@ -26,26 +27,30 @@ public:
 	bool clearTheList();
 }; 
 
-LinkedList::LinkedList()
+template <class T>
+LinkedList<T>::LinkedList()
 	: startPtr(nullptr),
 	endPtr(nullptr)
 {
 
 }
 
-LinkedList::~LinkedList()
+template <class T>
+LinkedList<T>::~LinkedList()
 {
 
 } 
 
-Node *LinkedList::getNewNode(const int &value)
+template <class T>
+Node<T> *LinkedList<T>::getNewNode(const int &value)
 {
-	return new Node(value);
+	return new Node<T>(value);
 }
 
-void LinkedList::insertLeft(int &value)
+template <class T>
+void LinkedList<T>::insertLeft(int &value)
 {
-	Node *newPtr = getNewNode(value);
+	Node<T> *newPtr = getNewNode(value);
 
 	if (isEmpty()) {
 		startPtr = endPtr = newPtr;
@@ -57,47 +62,58 @@ void LinkedList::insertLeft(int &value)
 
 } 
 
-void LinkedList::insertRight(int &value)
+template <class T>
+void LinkedList<T>::insertRight(int &value)
 {
 } 
 
-void LinkedList::addMiddleAfterNode(int &data)
+template <class T>
+void LinkedList<T>::addMiddleAfterNode(int &data)
 {
 	
 }
 
-void LinkedList::addMiddleBeforeNode(int &data)
+template <class T>
+void LinkedList<T>::addMiddleBeforeNode(int &data)
 {
 }
 
-void LinkedList::deleteMiddleAfterNode(int &data) 
+template <class T>
+void LinkedList<T>::deleteMiddleAfterNode(int &data)
 {
 }
 
-void LinkedList::deleteMiddleBeforeNode(int &data) 
+template <class T>
+void LinkedList<T>::deleteMiddleBeforeNode(int &data)
 {
 }
 
-bool LinkedList::removeFromLeft(int &value)
+template <class T>
+bool LinkedList<T>::removeFromLeft(int &value)
 {
 	return false;
 
 } 
 
-bool LinkedList::removeFromRight(int &value)
+template <class T>
+bool LinkedList<T>::removeFromRight(int &value)
 {
 	return false;
 
 } 
 
-bool LinkedList::isEmpty() const
+template <class T>
+bool LinkedList<T>::isEmpty() const
 {
 	return startPtr == nullptr;
 } 
 
-void LinkedList::printList() const
+template <class T>
+void LinkedList<T>::printList() const
 {
-	Node *currentPtr = startPtr;
+	if (isEmpty()) { std::cout << "empty list" << std::endl; }
+
+	Node<T> *currentPtr = startPtr;
 
 	while (currentPtr != nullptr) {
 		std::cout << currentPtr->data << " -> ";
@@ -105,11 +121,13 @@ void LinkedList::printList() const
 	} // end while
 } 
 
-void LinkedList::printListBackward() const
+template <class T>
+void LinkedList<T>::printListBackward() const
 {
 };
 
-bool LinkedList::clearTheList() 
+template <class T>
+bool LinkedList<T>::clearTheList()
 {
 	return false;//not implemented
 }
