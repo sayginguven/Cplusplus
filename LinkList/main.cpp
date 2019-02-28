@@ -1,7 +1,7 @@
 #include <iostream>
 #include "LinkedList.h"
 #include "Node.h"
-//git test!
+//git test!!
 void menu() {
 	std::cout << std::endl;
 	std::cout << " 0 - clean screen " << std::endl;
