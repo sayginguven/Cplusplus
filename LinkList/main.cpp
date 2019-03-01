@@ -75,7 +75,6 @@ int main()
 			myList.clearTheList(); //not implemented
 			break;
 		case 99:
-			exit;
 			break;
 		case 911:
 			menu();

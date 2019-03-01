@@ -163,27 +163,38 @@ bool LinkedList<T>::isEmpty() const
 template <class T>
 void LinkedList<T>::printList() const
 {
-	if (isEmpty()) { std::cout << "empty list" << std::endl; }
+	if (isEmpty()) { 
+		std::cout << "empty list" << std::endl; 
+		return; 
+	}
 
 	Node<T> *currentPtr = startPtr;
 
+	std::cout << " <- ";
 	while (currentPtr != nullptr) {
-		std::cout << currentPtr->data << " -> ";
+		std::cout << "|" << currentPtr->data << "| -> " ;
 		currentPtr = currentPtr->nextPtr;
-	} // end while
+	}
+
+	std::cout << std::endl;
+	
 } 
 
 template <class T>
 void LinkedList<T>::printListBackward() const
 {
-	if (isEmpty()) { std::cout << "empty list" << std::endl; }
+	if (isEmpty()) { 
+		std::cout << "empty list" << std::endl; 
+		return;
+	}
 
 	Node<T> *currentPtr = endPtr;
 
 	while (currentPtr != nullptr) {
-		std::cout << " <- " << currentPtr->data ;
+		std::cout << " <- |" << currentPtr->data << "|";
 		currentPtr = currentPtr->prevPtr;
 	} 
+	std::cout << " -> " << std::endl;
 }
 
 template <class T>
