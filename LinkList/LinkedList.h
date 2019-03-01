@@ -19,8 +19,8 @@ public:
 	void addMiddleBeforeNode(T &data);
 	void deleteMiddleAfterNode(T &data);
 	void deleteMiddleBeforeNode(T &data);
-	bool removeFromLeft(T &data);
-	bool removeFromRight(T &data);
+	bool removeFromLeft();
+	bool removeFromRight();
 	bool isEmpty() const;
 	void printList() const;
 	void printListBackward() const;
@@ -100,16 +100,57 @@ void LinkedList<T>::deleteMiddleBeforeNode(T &data)
 }
 
 template <class T>
-bool LinkedList<T>::removeFromLeft(T &value)
+bool LinkedList<T>::removeFromLeft()
 {
-	return false;
+	if (isEmpty()) {
+		printList();
+		return false;
+	}
 
+	Node<T> *currentPtr = startPtr;
+
+	if (startPtr->nextPtr == nullptr) {
+		std::cout << currentPtr->getData() << " is deleted" << std::endl;
+		delete currentPtr;
+		startPtr = nullptr;
+		endPtr = nullptr;
+		printList();
+		return true;
+	} else {
+		startPtr = currentPtr->nextPtr;
+		startPtr->prevPtr = nullptr;
+		std::cout << currentPtr->getData() << " is deleted" << std::endl;
+		delete currentPtr;
+		printList();
+		return true;
+	}
 } 
 
 template <class T>
-bool LinkedList<T>::removeFromRight(T &value)
+bool LinkedList<T>::removeFromRight()
 {
-	return false;
+	if (isEmpty()) {
+		printList();
+		return false;
+	}
+
+	Node<T> *currentPtr = endPtr;
+
+	if (endPtr->prevPtr == nullptr) {
+		std::cout << currentPtr->getData() << " is deleted" << std::endl;
+		delete currentPtr;
+		startPtr = nullptr;
+		endPtr = nullptr;
+		printList();
+		return true;
+	}	else {
+		endPtr = currentPtr->prevPtr;
+		endPtr->nextPtr= nullptr;
+		std::cout << currentPtr->getData() << " is deleted" << std::endl;
+		delete currentPtr;
+		printList();
+		return true;
+	}
 
 } 
 

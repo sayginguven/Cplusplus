@@ -2,7 +2,6 @@
 #include <string>
 #include "LinkedList.h"
 #include "Node.h"
-//git test!!
 
 void menu() {
 	std::cout << std::endl;
@@ -61,10 +60,10 @@ int main()
 			myList.deleteMiddleBeforeNode(data); //not implemented
 			break;
 		case 7: 
-			myList.removeFromLeft(data); //not implemented
+			myList.removeFromLeft(); //not implemented
 			break;
 		case 8: 
-			myList.removeFromRight(data); //not implemented
+			myList.removeFromRight(); //not implemented
 			break;
 		case 9: 
 			myList.printList(); //not implemented
