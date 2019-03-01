@@ -24,6 +24,7 @@ void menu() {
 
 int main()
 {
+
 	LinkedList<int> myList;
 
 	int choice;
@@ -43,7 +44,9 @@ int main()
 			myList.insertLeft(data);
 			break;
 		case 2:
-			myList.insertRight(data); //not implemented
+			std::cout << "Enter the data: ";
+			std::cin >> data;
+			myList.insertRight(data);
 			break;
 		case 3:
 			myList.addMiddleAfterNode(data); //not implemented
