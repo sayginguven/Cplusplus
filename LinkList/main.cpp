@@ -10,13 +10,12 @@ void menu() {
 	std::cout << " 2 - insert Node to back (right) " << std::endl;
 	std::cout << " 3 - insert into middle after node " << std::endl;
 	std::cout << " 4 - insert into middle before node " << std::endl;
-	std::cout << " 5 - delete from middle after node " << std::endl;
-	std::cout << " 6 - delete from middle before node " << std::endl;
-	std::cout << " 7 - remove from front (left) " << std::endl;
-	std::cout << " 8 - remove from back (right) " << std::endl;
-	std::cout << " 9 - print list forward " << std::endl;
-	std::cout << " 10 - print list backward " << std::endl;
-	std::cout << " 11 - clear the list " << std::endl;
+	std::cout << " 5 - delete middle node " << std::endl;
+	std::cout << " 6 - remove from front (left) " << std::endl;
+	std::cout << " 7 - remove from back (right) " << std::endl;
+	std::cout << " 8 - print list forward " << std::endl;
+	std::cout << " 9 - print list backward " << std::endl;
+	std::cout << " 10 - clear the list " << std::endl;
 	std::cout << " 99 - exit " << std::endl;
 	std::cout << " 911 - menu " << std::endl;
 }
@@ -54,25 +53,24 @@ int main()
 			myList.addMiddleBeforeNode(data); //not implemented
 			break;
 		case 5: 
-			myList.deleteMiddleAfterNode(data); //not implemented
+			std::cout << "Enter the data for remove: ";
+			std::cin >> data;
+			myList.deleteMiddleNode(data); 
 			break;
 		case 6: 
-			myList.deleteMiddleBeforeNode(data); //not implemented
+			myList.removeFromLeft(); 
 			break;
 		case 7: 
-			myList.removeFromLeft(); //not implemented
+			myList.removeFromRight(); 
 			break;
 		case 8: 
-			myList.removeFromRight(); //not implemented
+			myList.printList(); 
 			break;
 		case 9: 
-			myList.printList(); //not implemented
+			myList.printListBackward();
 			break;
 		case 10: 
-			myList.printListBackward(); //not implemented
-			break;
-		case 11: 
-			myList.clearTheList(); //not implemented
+			myList.clearTheList(); 
 			break;
 		case 99:
 			break;
