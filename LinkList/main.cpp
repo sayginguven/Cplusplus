@@ -2,6 +2,7 @@
 #include <string>
 #include "LinkedList.h"
 #include "Node.h"
+#include "variableTypes.h"
 
 void menu() {
 	std::cout << std::endl;
@@ -22,9 +23,9 @@ void menu() {
 
 int main()
 {
-
-	LinkedList<int> myList;
-
+	LinkedList<VARTYPE> myList;
+	VARTYPE data; // this comes from variableTypes.h
+	
 	int choice;
 	menu();
 	do {
@@ -32,11 +33,11 @@ int main()
 		std::cin >> choice;
 		switch (choice)
 		{
-		case 0://clean the screen
+		case 0://clean the screen for windows os
 			system("cls");
 			break;
 		case 1: 
-			int data;
+			
 			std::cout << "Enter the data: ";
 			std::cin >> data;
 			myList.insertLeft(data);
@@ -47,10 +48,14 @@ int main()
 			myList.insertRight(data);
 			break;
 		case 3:
-			myList.addMiddleAfterNode(data); //not implemented
+			std::cout << "Enter the node data : ";
+			std::cin >> data;
+			myList.addMiddleAfterNode(data);
 			break;
 		case 4:
-			myList.addMiddleBeforeNode(data); //not implemented
+			std::cout << "Enter the node data : ";
+			std::cin >> data;
+			myList.addMiddleBeforeNode(data);
 			break;
 		case 5: 
 			std::cout << "Enter the data for remove: ";

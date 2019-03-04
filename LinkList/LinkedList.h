@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Node.h" 
+#include "variableTypes.h"
 
 template <class T>
 class LinkedList {
@@ -80,12 +81,78 @@ void LinkedList<T>::insertRight(T &value)
 template <class T>
 void LinkedList<T>::addMiddleAfterNode(T &data)
 {
-	
+	Node<T> *currentPtr = startPtr;
+
+	while (currentPtr != nullptr) {
+		if (currentPtr->data == data) {
+			VARTYPE newData;
+			std::cout << "found it!" << std::endl;
+			std::cout << "Enter the data for new node: " << std::endl;
+			std::cin >> newData;
+
+			if (startPtr == endPtr) { // one node only
+				insertRight(newData);
+				printList();
+				return;
+			} else if (endPtr == currentPtr && startPtr != endPtr) { // node at the end position
+				insertRight(newData);
+				printList();
+				return;
+			} else { // node in the middle
+				Node<T> *newPtr = getNewNode(newData);
+				newPtr->prevPtr = currentPtr;
+				newPtr->nextPtr= currentPtr->nextPtr;
+				currentPtr->nextPtr->prevPtr = newPtr;
+				currentPtr->nextPtr = newPtr;
+				printList();
+				return;
+			}
+		} else {
+			currentPtr = currentPtr->nextPtr;
+		}
+	}
+
+	std::cout << "not found it. mission abort!" << std::endl;
 }
 
 template <class T>
 void LinkedList<T>::addMiddleBeforeNode(T &data)
 {
+	Node<T> *currentPtr = startPtr;
+
+	while (currentPtr != nullptr) {
+		if (currentPtr->data == data) {
+			VARTYPE newData;
+			std::cout << "found it!" << std::endl;
+			std::cout << "Enter the data for new node: " << std::endl;
+			std::cin >> newData;
+
+			if (startPtr == endPtr) { // one node only
+				insertLeft(newData);
+				printList();
+				return;
+			}
+			else if (startPtr == currentPtr && startPtr != endPtr) { // node at the beginning position
+				insertLeft(newData);
+				printList();
+				return;
+			}
+			else { // node in the middle
+				Node<T> *newPtr = getNewNode(newData);
+				newPtr->nextPtr = currentPtr;
+				newPtr->prevPtr = currentPtr->prevPtr;
+				currentPtr->prevPtr->nextPtr= newPtr;
+				currentPtr->prevPtr = newPtr;
+				printList();
+				return;
+			}
+		}
+		else {
+			currentPtr = currentPtr->nextPtr;
+		}
+	}
+
+	std::cout << "not found it. mission abort!" << std::endl;
 }
 
 template <class T>
@@ -186,20 +253,19 @@ bool LinkedList<T>::isEmpty() const
 template <class T>
 void LinkedList<T>::printList() const
 {
-	if (isEmpty()) { 
-		std::cout << "empty list" << std::endl; 
-		return; 
+	if (isEmpty()) {
+		std::cout << "empty list" << std::endl;
+		return;
 	}
 
 	Node<T> *currentPtr = startPtr;
 
 	std::cout << " <- ";
 	while (currentPtr != nullptr) {
-		std::cout << "|" << currentPtr->data << "| -> " ;
+		std::cout << "|" << currentPtr->data << "| -> ";
 		currentPtr = currentPtr->nextPtr;
 	}
 
-	delete currentPtr;
 	std::cout << std::endl;
 } 
 
@@ -217,7 +283,7 @@ void LinkedList<T>::printListBackward() const
 		std::cout << " <- |" << currentPtr->data << "|";
 		currentPtr = currentPtr->prevPtr;
 	} 
-	delete currentPtr;
+
 	std::cout << " -> " << std::endl;
 }
 
@@ -235,18 +301,15 @@ bool LinkedList<T>::clearTheList()
 		Node<T> *currentPtr = endPtr;
 
 		if (endPtr->prevPtr == nullptr) {
-			delete currentPtr;
 			startPtr = nullptr;
 			endPtr = nullptr;
 		}
 		else {
 			endPtr = currentPtr->prevPtr;
 			endPtr->nextPtr = nullptr;
-			delete currentPtr;
 		}
 	}
 
-	delete currentPtr;
 	printList();
 	return true;
 }
