@@ -200,5 +200,27 @@ void LinkedList<T>::printListBackward() const
 template <class T>
 bool LinkedList<T>::clearTheList()
 {
-	return false;//not implemented
+	if (isEmpty()) {
+		printList();
+		return false;
+	}
+
+	while (!isEmpty()) {
+		//remove from right without prompt message
+
+		Node<T> *currentPtr = endPtr;
+
+		if (endPtr->prevPtr == nullptr) {
+			delete currentPtr;
+			startPtr = nullptr;
+			endPtr = nullptr;
+		}
+		else {
+			endPtr = currentPtr->prevPtr;
+			endPtr->nextPtr = nullptr;
+			delete currentPtr;
+		}
+	}
+	printList();
+	return true;
 }
