@@ -26,6 +26,34 @@
 //	return static_cast<double>(loan) / months;
 //}
 
+//function series 
+//void func1();
+//void func2();
+//void func3();
+//
+//void func1() {
+//	std::cout << "function 1 starts" << std::endl;
+//	func2();
+//	std::cout << "function 1 ends" << std::endl;
+//}
+//
+//void func2() {
+//	std::cout << "function 2 starts" << std::endl;
+//	try {
+//		func3();
+//	}
+//	catch (std::string &exception) {
+//		std::cerr << "Error! in func2()" << std::endl;
+//	}
+//	std::cout << "function 2 ends" << std::endl;
+//}
+//
+//void func3() {
+//	std::cout << "function 3 starts" << std::endl;
+//	throw std::string{ "Error!" };
+//	std::cout << "function 3 ends" << std::endl;
+//}
+
 int main()
 {
 	int studentLoan;
@@ -126,6 +154,16 @@ int main()
 	//	std::cerr << "Something went wrong but I dont know what. maybe its you. Its always you." << std::endl;
 	//}
 
+	
+	////function series
+	//std::cout << "main starts" << std::endl;
+	//try {
+	//	func1();
+	//}
+	//catch (int &exception) {
+	//	std::cerr << "Error in main." << std::endl;
+	//}
+	//std::cout << "main ends" << std::endl;
 
 
 
