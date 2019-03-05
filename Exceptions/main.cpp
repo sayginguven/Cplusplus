@@ -1,6 +1,23 @@
 #include <iostream>
 #include <string>
 
+class negativeException :public std::exception{
+public:
+	negativeException() noexcept = default;
+	~negativeException() = default;
+	virtual char const* what() const noexcept {
+		return "I have no idea how can you think that I am able to divide something negative.";
+	}
+};
+
+class divideByZero: public  std::exception{
+public:
+	divideByZero() noexcept = default;
+	~divideByZero() = default;
+	virtual char const* what() const noexcept{
+		return "dividing by zero, really?, be smart. please";
+	}
+};
 //f1
 //double calculatePayment(int loan, int months) {
 //	return static_cast<double>(loan) / months;
@@ -53,6 +70,16 @@
 //	throw std::string{ "Error!" };
 //	std::cout << "function 3 ends" << std::endl;
 //}
+
+double calculatePayment(int loan, int months) {
+	if (months == 0) {
+		throw divideByZero{};
+	}
+	if (loan < 0 || months < 0) {
+		throw negativeException{};
+	}
+	return static_cast<double>(loan) / months;
+}
 
 int main()
 {
@@ -155,15 +182,19 @@ int main()
 	//}
 
 	
-	////function series
-	//std::cout << "main starts" << std::endl;
-	//try {
-	//	func1();
-	//}
-	//catch (int &exception) {
-	//	std::cerr << "Error in main." << std::endl;
-	//}
-	//std::cout << "main ends" << std::endl;
+	try
+	{
+		result = calculatePayment(studentLoan, howManyMonths);
+		std::cout << "your monthly payment is : " << result << std::endl;
+	}
+	catch (divideByZero &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+	catch (negativeException &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
 
 
 
